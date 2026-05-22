@@ -1,0 +1,1569 @@
+{
+  "1000": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a"
+  },
+  "1000-10": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-10"
+  },
+  "1000-11": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-11"
+  },
+  "1000-12": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-12"
+  },
+  "1000-20": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-20"
+  },
+  "1000-21": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-21"
+  },
+  "1000-22": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-22"
+  },
+  "1000-30": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-30"
+  },
+  "1000-31": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-31"
+  },
+  "1000-32": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-32"
+  },
+  "1000-33": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-33"
+  },
+  "1000[10]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-10"
+  },
+  "1000[11]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-11"
+  },
+  "1000[12]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-12"
+  },
+  "1000[20]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-20"
+  },
+  "1000[21]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-21"
+  },
+  "1000[22]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-22"
+  },
+  "1000[30]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-30"
+  },
+  "1000[31]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-31"
+  },
+  "1000[32]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-32"
+  },
+  "1000[33]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1000-33"
+  },
+  "1007": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1007-34"
+  },
+  "1007-34": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1007-34"
+  },
+  "1007[34]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1007-34"
+  },
+  "1008": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1008-34"
+  },
+  "1008-34": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1008-34"
+  },
+  "1008[34]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1008-34"
+  },
+  "101": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "101"
+  },
+  "101-11": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "101-11"
+  },
+  "101-21": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "101-21"
+  },
+  "1012": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a"
+  },
+  "1012-50": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1012-50"
+  },
+  "1012-51": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1012-51"
+  },
+  "1012[50]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1012-50"
+  },
+  "1012[51]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1012-51"
+  },
+  "101[11]": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "101-11"
+  },
+  "101[21]": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "101-21"
+  },
+  "1020": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1020-30"
+  },
+  "1020-30": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1020-30"
+  },
+  "1020[30]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1020-30"
+  },
+  "1022": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a"
+  },
+  "1022-10": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1022-10"
+  },
+  "1022-11": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1022-11"
+  },
+  "1022-12": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1022-12"
+  },
+  "1022[10]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1022-10"
+  },
+  "1022[11]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1022-11"
+  },
+  "1022[12]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1022-12"
+  },
+  "1024": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1024-10"
+  },
+  "1024-10": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1024-10"
+  },
+  "1024[10]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1024-10"
+  },
+  "1026": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1026-36"
+  },
+  "1026-33": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a"
+  },
+  "1026-36": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1026-36"
+  },
+  "1026[36]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1026-36"
+  },
+  "1042": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1042-33"
+  },
+  "1042-33": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1042-33"
+  },
+  "1042-36": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a"
+  },
+  "1042[33]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1042-33"
+  },
+  "1044": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a"
+  },
+  "1044-10": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1044-10"
+  },
+  "1044-11": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1044-11"
+  },
+  "1044-30": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1044-30"
+  },
+  "1044[10]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1044-10"
+  },
+  "1044[11]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1044-11"
+  },
+  "1044[30]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1044-30"
+  },
+  "1060": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1060-31"
+  },
+  "1060-31": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1060-31"
+  },
+  "1060[31]": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a",
+    "svg": "1060-31"
+  },
+  "123": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "123"
+  },
+  "125": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "125"
+  },
+  "136": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "136-10": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "136-10"
+  },
+  "136-20": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "136-20"
+  },
+  "136[10]": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "136-10"
+  },
+  "136[20]": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "136-20"
+  },
+  "205": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "205"
+  },
+  "206": {
+    "fill": "#ffffff",
+    "scale": 0.666,
+    "stroke": "#dc1414",
+    "svg": "206"
+  },
+  "209": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "209"
+  },
+  "209-10": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "209-10"
+  },
+  "209-30": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "209-30"
+  },
+  "209[10]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "209-10"
+  },
+  "209[30]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "209-30"
+  },
+  "211": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "211"
+  },
+  "211-10": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "211-10"
+  },
+  "211[10]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "211-10"
+  },
+  "214": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "214"
+  },
+  "214-10": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "214-10"
+  },
+  "214-20": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff"
+  },
+  "214-30": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "214-30"
+  },
+  "214[10]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "214-10"
+  },
+  "214[30]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "214-30"
+  },
+  "215": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "215"
+  },
+  "220": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff"
+  },
+  "220-10": {
+    "fill": "#1953a4",
+    "scale": 0.825,
+    "stroke": "#ffffff",
+    "svg": "220-10"
+  },
+  "220-20": {
+    "fill": "#1953a4",
+    "scale": 0.825,
+    "stroke": "#ffffff",
+    "svg": "220-20"
+  },
+  "220[10]": {
+    "fill": "#1953a4",
+    "scale": 0.825,
+    "stroke": "#ffffff",
+    "svg": "220-10"
+  },
+  "220[20]": {
+    "fill": "#1953a4",
+    "scale": 0.825,
+    "stroke": "#ffffff",
+    "svg": "220-20"
+  },
+  "222": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "222"
+  },
+  "222-10": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "222-10"
+  },
+  "222[10]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "222-10"
+  },
+  "224": {
+    "fill": "#1a7f3c",
+    "scale": 0.679,
+    "stroke": "#ffffff",
+    "svg": "224"
+  },
+  "224-51": {
+    "fill": "#1a7f3c",
+    "stroke": "#ffffff"
+  },
+  "237": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "237"
+  },
+  "239": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "239"
+  },
+  "239.1022-10": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff"
+  },
+  "240": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "240"
+  },
+  "241": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "241-30"
+  },
+  "241-30": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "241-30"
+  },
+  "241-31": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "241-31"
+  },
+  "241[30]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "241-30"
+  },
+  "241[31]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "241-31"
+  },
+  "242": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "242.1"
+  },
+  "242.1": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "242.1"
+  },
+  "244": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "244.1"
+  },
+  "244.1": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "244.1"
+  },
+  "244.2": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff"
+  },
+  "244.3": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "244.3"
+  },
+  "245": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "245"
+  },
+  "250": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "250"
+  },
+  "253": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "253"
+  },
+  "254": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "254"
+  },
+  "257": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "257-51"
+  },
+  "257-51": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "257-51"
+  },
+  "257[51]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "257-51"
+  },
+  "259": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "259"
+  },
+  "260": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "260"
+  },
+  "262": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "262"
+  },
+  "262[5": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "262[5.5]"
+  },
+  "262[5.5]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "262[5.5]"
+  },
+  "265": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "265"
+  },
+  "265-2.1": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "265-3.8": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "265[3": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "265[3.8]"
+  },
+  "265[3.8]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "265[3.8]"
+  },
+  "267": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "267"
+  },
+  "270": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "270.1": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "270.1"
+  },
+  "270.2": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "270.2"
+  },
+  "270.3": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "274": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "274-10": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-10"
+  },
+  "274-100": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-100"
+  },
+  "274-15": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "274-20": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-20"
+  },
+  "274-30": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-30"
+  },
+  "274-5": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "274-50": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-50"
+  },
+  "274-60": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "274-70": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-70"
+  },
+  "274-80": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "274.1": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274.1"
+  },
+  "274.1-20": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274.1-20"
+  },
+  "274.2": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "274.2-20": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "274[100]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-100"
+  },
+  "274[10]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-10"
+  },
+  "274[20]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-20"
+  },
+  "274[30]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-30"
+  },
+  "274[50]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-50"
+  },
+  "274[70]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "274-70"
+  },
+  "283": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283"
+  },
+  "283-10": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-10"
+  },
+  "283-11": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-11"
+  },
+  "283-20": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-20"
+  },
+  "283-21": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-21"
+  },
+  "283-30": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-30"
+  },
+  "283-31": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-31"
+  },
+  "283[10]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-10"
+  },
+  "283[11]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-11"
+  },
+  "283[20]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-20"
+  },
+  "283[21]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-21"
+  },
+  "283[30]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-30"
+  },
+  "283[31]": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "283-31"
+  },
+  "286": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286"
+  },
+  "286-10": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-10"
+  },
+  "286-11": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-11"
+  },
+  "286-20": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-20"
+  },
+  "286-21": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-21"
+  },
+  "286-30": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-30"
+  },
+  "286-31": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-31"
+  },
+  "286[10]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-10"
+  },
+  "286[11]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-11"
+  },
+  "286[20]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-20"
+  },
+  "286[21]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-21"
+  },
+  "286[30]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-30"
+  },
+  "286[31]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "286-31"
+  },
+  "290": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "290.1": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "290.1"
+  },
+  "290.2": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "290.2"
+  },
+  "293": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "293"
+  },
+  "301": {
+    "fill": "#ffffff",
+    "scale": 0.708,
+    "stroke": "#dc1414",
+    "svg": "301"
+  },
+  "306": {
+    "fill": "#fcd116",
+    "stroke": "#1a1a1a",
+    "svg": "306"
+  },
+  "310": {
+    "fill": "#fcd116",
+    "stroke": "#1a1a1a"
+  },
+  "314": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314"
+  },
+  "314-10": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314-10"
+  },
+  "314-20": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314-20"
+  },
+  "314-30": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314-30"
+  },
+  "314-31": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314-31"
+  },
+  "314.1": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314.1"
+  },
+  "314.2": {
+    "fill": "#1a7f3c",
+    "stroke": "#ffffff",
+    "svg": "314.2"
+  },
+  "314[10]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314-10"
+  },
+  "314[20]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314-20"
+  },
+  "314[30]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314-30"
+  },
+  "314[31]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "314-31"
+  },
+  "315": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff"
+  },
+  "315-50": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-50"
+  },
+  "315-51": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-51"
+  },
+  "315-52": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-52"
+  },
+  "315-53": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-53"
+  },
+  "315-55": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-55"
+  },
+  "315-56": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-56"
+  },
+  "315-57": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-57"
+  },
+  "315-58": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-58"
+  },
+  "315-60": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-60"
+  },
+  "315-61": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-61"
+  },
+  "315-62": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-62"
+  },
+  "315-63": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-63"
+  },
+  "315-65": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-65"
+  },
+  "315-66": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-66"
+  },
+  "315-67": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-67"
+  },
+  "315-68": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-68"
+  },
+  "315-70": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-70"
+  },
+  "315-71": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-71"
+  },
+  "315-72": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-72"
+  },
+  "315-73": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-73"
+  },
+  "315-75": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-75"
+  },
+  "315-76": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-76"
+  },
+  "315-77": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-77"
+  },
+  "315-78": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-78"
+  },
+  "315-80": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-80"
+  },
+  "315-81": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-81"
+  },
+  "315-82": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-82"
+  },
+  "315-83": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-83"
+  },
+  "315-85": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-85"
+  },
+  "315-86": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-86"
+  },
+  "315-87": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-87"
+  },
+  "315-88": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-88"
+  },
+  "315[50]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-50"
+  },
+  "315[51]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-51"
+  },
+  "315[52]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-52"
+  },
+  "315[53]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-53"
+  },
+  "315[55]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-55"
+  },
+  "315[56]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-56"
+  },
+  "315[57]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-57"
+  },
+  "315[58]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-58"
+  },
+  "315[60]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-60"
+  },
+  "315[61]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-61"
+  },
+  "315[62]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-62"
+  },
+  "315[63]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-63"
+  },
+  "315[65]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-65"
+  },
+  "315[66]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-66"
+  },
+  "315[67]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-67"
+  },
+  "315[68]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-68"
+  },
+  "315[70]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-70"
+  },
+  "315[71]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-71"
+  },
+  "315[72]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-72"
+  },
+  "315[73]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-73"
+  },
+  "315[75]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-75"
+  },
+  "315[76]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-76"
+  },
+  "315[77]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-77"
+  },
+  "315[78]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-78"
+  },
+  "315[80]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-80"
+  },
+  "315[81]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-81"
+  },
+  "315[82]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-82"
+  },
+  "315[83]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-83"
+  },
+  "315[85]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-85"
+  },
+  "315[86]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-86"
+  },
+  "315[87]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-87"
+  },
+  "315[88]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "315-88"
+  },
+  "325": {
+    "fill": "#1953a4",
+    "scale": 0.82,
+    "stroke": "#ffffff",
+    "svg": "325"
+  },
+  "325.1": {
+    "fill": "#1953a4",
+    "scale": 0.82,
+    "stroke": "#ffffff",
+    "svg": "325.1"
+  },
+  "325.2": {
+    "fill": "#1953a4",
+    "scale": 0.82,
+    "stroke": "#ffffff",
+    "svg": "325.2"
+  },
+  "327": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "327"
+  },
+  "333": {
+    "fill": "#1953a4",
+    "scale": 0.19,
+    "stroke": "#ffffff",
+    "svg": "333"
+  },
+  "350": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff"
+  },
+  "350-10": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "350-10"
+  },
+  "350-20": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "350-20"
+  },
+  "350[10]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "350-10"
+  },
+  "350[20]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "350-20"
+  },
+  "356": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "356"
+  },
+  "357": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "357"
+  },
+  "357-50": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "357-50"
+  },
+  "357-51": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "357-51"
+  },
+  "357-52": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "357-52"
+  },
+  "357[50]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "357-50"
+  },
+  "357[51]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "357-51"
+  },
+  "357[52]": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "357-52"
+  },
+  "386": {
+    "fill": "#ffffff",
+    "scale": 0.167,
+    "stroke": "#dc1414",
+    "svg": "386.3"
+  },
+  "386.3": {
+    "fill": "#ffffff",
+    "scale": 0.167,
+    "stroke": "#dc1414",
+    "svg": "386.3"
+  },
+  "386.3-50": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "392": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414",
+    "svg": "392"
+  },
+  "432": {
+    "fill": "#ffffff",
+    "scale": 0.266,
+    "stroke": "#1a1a1a",
+    "svg": "432-20"
+  },
+  "432-20": {
+    "fill": "#ffffff",
+    "scale": 0.266,
+    "stroke": "#1a1a1a",
+    "svg": "432-20"
+  },
+  "432-40": {
+    "fill": "#ffffff",
+    "stroke": "#1a1a1a"
+  },
+  "432[20]": {
+    "fill": "#ffffff",
+    "scale": 0.266,
+    "stroke": "#1a1a1a",
+    "svg": "432-20"
+  },
+  "437": {
+    "fill": "#1953a4",
+    "stroke": "#ffffff",
+    "svg": "437"
+  },
+  "439": {
+    "fill": "#fcd116",
+    "scale": 0.24,
+    "stroke": "#1a1a1a",
+    "svg": "439"
+  },
+  "448": {
+    "fill": "#1953a4",
+    "scale": 0.594,
+    "stroke": "#ffffff",
+    "svg": "448"
+  },
+  "449": {
+    "fill": "#1953a4",
+    "scale": 0.129,
+    "stroke": "#ffffff",
+    "svg": "449"
+  },
+  "605": {
+    "fill": "#ffffff",
+    "stroke": "#dc1414"
+  },
+  "605-10": {
+    "fill": "#ffffff",
+    "scale": 0.598,
+    "stroke": "#dc1414",
+    "svg": "605-10"
+  },
+  "605-11": {
+    "fill": "#ffffff",
+    "scale": 0.598,
+    "stroke": "#dc1414",
+    "svg": "605-11"
+  },
+  "605-20": {
+    "fill": "#ffffff",
+    "scale": 0.598,
+    "stroke": "#dc1414",
+    "svg": "605-20"
+  },
+  "605-21": {
+    "fill": "#ffffff",
+    "scale": 0.598,
+    "stroke": "#dc1414",
+    "svg": "605-21"
+  },
+  "605[10]": {
+    "fill": "#ffffff",
+    "scale": 0.598,
+    "stroke": "#dc1414",
+    "svg": "605-10"
+  },
+  "605[11]": {
+    "fill": "#ffffff",
+    "scale": 0.598,
+    "stroke": "#dc1414",
+    "svg": "605-11"
+  },
+  "605[20]": {
+    "fill": "#ffffff",
+    "scale": 0.598,
+    "stroke": "#dc1414",
+    "svg": "605-20"
+  },
+  "605[21]": {
+    "fill": "#ffffff",
+    "scale": 0.598,
+    "stroke": "#dc1414",
+    "svg": "605-21"
+  },
+  "625": {
+    "fill": "#ffffff",
+    "scale": 0.4,
+    "stroke": "#dc1414",
+    "svg": "625-21"
+  },
+  "625-21": {
+    "fill": "#ffffff",
+    "scale": 0.4,
+    "stroke": "#dc1414",
+    "svg": "625-21"
+  },
+  "625[21]": {
+    "fill": "#ffffff",
+    "scale": 0.4,
+    "stroke": "#dc1414",
+    "svg": "625-21"
+  }
+}

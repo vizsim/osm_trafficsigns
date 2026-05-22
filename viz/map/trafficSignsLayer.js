@@ -118,7 +118,7 @@ function buildFallbackLabelSpec(knownCodes) {
     const filter = knownCodes?.length
         ? ['!', ['in', ['to-string', ['get', 'icon_code']], ['literal', knownCodes]]]
         // No knownCodes loaded -> show labels for nothing (avoid visual noise).
-        : ['==', 1, 0];
+        : ['==', ['literal', 'never'], ['literal', 'always']];
     return {
         id: trafficSignsFallbackLabelLayerId,
         type: 'symbol',
