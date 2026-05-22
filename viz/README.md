@@ -18,7 +18,7 @@ uv run python scripts/extract_sign_colors.py
 uv run python scripts/build_pmtiles.py
 ```
 
-The SVG library lives in `symbols/<country>/` (committed in-repo, no fetch
+The SVG library lives in `viz/symbols/<country>/` (committed in-repo, no fetch
 step needed). Step 2 requires `tippecanoe` on `$PATH` — `apt`-installable
 on Ubuntu/Debian, or build from source: <https://github.com/felt/tippecanoe>.
 
@@ -61,8 +61,8 @@ viz/
 │   ├── trafficSignIcons.js  styleimagemissing handler + default-icon bitmap + text-box bitmap
 │   ├── signColors.js        loads sign_colors.json → MapLibre `match` expressions
 │   └── permalink.js         ?map=zoom/lat/lon URL sync
-├── symbols -> ../symbols    served SVGs (symlink, gitignored)
-├── data/                    PMTiles + sign_colors.json (gitignored)
+├── symbols/                 SVG library (StVO sign icons, organized by country)
+├── data/                    PMTiles + sign_colors.json (PMTiles + JSON tracked)
 └── SIGN_CLASSIFICATION.md   auto-generated per-sign colour reference
 ```
 
@@ -152,5 +152,5 @@ Most knobs live in [config.js](config.js):
 | `trafficSignsStyle.dotColor` / `dotStrokeColor` | Fallback dot colour |
 | `initialMapConfig.center` / `.zoom` | Default view when no permalink |
 
-When you add new SVGs to `symbols/<country>/`, re-run
+When you add new SVGs to `viz/symbols/<country>/`, re-run
 `scripts/extract_sign_colors.py` to refresh the JSON + classification doc.

@@ -1,4 +1,4 @@
-"""Derive a per-sign {fill, stroke} pair from each SVG in ``symbols/``.
+"""Derive a per-sign {fill, stroke} pair from each SVG in ``viz/symbols/``.
 
 Heuristic:
 - Parse all ``fill:#xxxxxx`` and ``fill="#xxxxxx"`` colors in the SVG.
@@ -29,7 +29,7 @@ from pathlib import Path
 from tsp.signlist import collapse_shared_family, normalize_code
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-SVG_DIR = REPO_ROOT / "symbols" / "DE"
+SVG_DIR = REPO_ROOT / "viz" / "symbols" / "DE"
 OUT_PATH = REPO_ROOT / "viz" / "data" / "sign_colors.json"
 README_PATH = REPO_ROOT / "viz" / "SIGN_CLASSIFICATION.md"
 # Optional: also resolve every code that appears in these parquets via
@@ -416,7 +416,7 @@ def write_readme(
     )
     lines.append("")
     lines.append(
-        "1. **direct** — there's a matching SVG file in `symbols/DE/`; colors"
+        "1. **direct** — there's a matching SVG file in `viz/symbols/DE/`; colors"
         " are derived by scanning its `fill:` and `stroke:` attributes,"
         " bucketed by hue."
     )

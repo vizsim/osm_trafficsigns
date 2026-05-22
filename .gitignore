@@ -11,7 +11,6 @@
 viz/data/*
 !viz/data/*.pmtiles
 !viz/data/sign_colors.json
-viz/symbols
 
 # --- Python build / venv ---
 __pycache__/

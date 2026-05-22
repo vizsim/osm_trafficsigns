@@ -20,10 +20,10 @@ ROOT_EXPR = f"coalesce(nullif(@project_folder, ''), '{ROOT}')"
 
 
 def svg_path_expr(index: int) -> str:
-    """Path to the N-th SVG: ``<root>/symbols/<country>/<sign_list[N]>.svg``."""
+    """Path to the N-th SVG: ``<root>/viz/symbols/<country>/<sign_list[N]>.svg``."""
     return (
         f"with_variable('root', {ROOT_EXPR},"
-        f" @root || '/symbols/' || \"country_code\" || '/' ||"
+        f" @root || '/viz/symbols/' || \"country_code\" || '/' ||"
         f" trim(array_get(string_to_array(\"sign_list\", ','), {index}))"
         f" || '.svg')"
     )
@@ -46,7 +46,7 @@ def offset_expr(index: int) -> str:
 def label_expr() -> str:
     """Show codes whose SVGs don't exist (newline-joined). Empty if all rendered."""
     inner = (
-        f"@root || '/symbols/' || \"country_code\" || '/' ||"
+        f"@root || '/viz/symbols/' || \"country_code\" || '/' ||"
         f" trim(@element) || '.svg'"
     )
     return (

@@ -10,7 +10,7 @@ prefixes, bracket notation, and free-text annotations. Examples:
     "Sinnbild \"Radverkehr\" ..."           -> None
 
 The returned string is the canonical sign code (e.g. ``274-30``) that maps
-1:1 to an SVG file in ``symbols/<country>/`` when one exists.
+1:1 to an SVG file in ``viz/symbols/<country>/`` when one exists.
 """
 
 from __future__ import annotations

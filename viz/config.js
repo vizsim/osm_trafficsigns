@@ -36,11 +36,7 @@ export const trafficSignsConfig = {
     pmtiles: `${PMTILES_PREFIX}${docBase}data/berlin_signs.pmtiles`,
     minzoom: 9,
     maxzoom: 22,
-    // Resolved relative to this file (viz/config.js), so it always points to
-    // <repo-root>/symbols/ regardless of where viz/ is served from. Avoids the
-    // need for the viz/symbols → ../symbols dev-time symlink (which static
-    // hosts like GitHub Pages don't follow).
-    iconBaseUrl: new URL('../symbols/', import.meta.url).href,
+    iconBaseUrl: `${docBase}symbols/`,     // resolved as <docBase>symbols/<country>/<code>.svg
     defaultIconId: 'traffic-sign-default',
 };
 

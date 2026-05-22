@@ -92,7 +92,7 @@ uv run python scripts/build_pmtiles.py        # bremen_signs.parquet → viz/dat
 python3 -m http.server 8000 --directory viz   # open http://localhost:8000/
 ```
 
-The SVG library (`symbols/<country>/`) is committed in the repo — no
+The SVG library (`viz/symbols/<country>/`) is committed in the repo — no
 separate fetch step needed. Most SVGs are from
 [SupaplexOSM](https://github.com/SupaplexOSM/traffic_sign_processing); a
 few are hand-drawn in-tree for codes the upstream doesn't have.
@@ -105,7 +105,7 @@ badge" with the raw sign code when an SVG isn't in the library.
 ## QGIS style (SVG sign symbols)
 
 A QGIS QML style auto-loads when you drop the parquet into QGIS — both live in
-`output/`. The QML reads SVGs from `symbols/<country>/<code>.svg` using an
+`output/`. The QML reads SVGs from `viz/symbols/<country>/<code>.svg` using an
 absolute path (configured to `\\wsl.localhost\Ubuntu\home\simon\osm_trafficsigns`
 in this checkout — adjust in `scripts/build_qml.py` if your repo lives
 elsewhere, then re-run the script).
@@ -123,7 +123,7 @@ It writes one `.qml` per parquet next to the parquet in `output/`.
 `scripts/extract_sign_colors.py` derives a `{fill, stroke, svg}` triple for
 every sign code from two sources:
 
-1. **The SVG library in `symbols/<country>/`** — fills and strokes are scanned
+1. **The SVG library in `viz/symbols/<country>/`** — fills and strokes are scanned
    from each SVG, bucketed by hue, and mapped to one of five visual
    categories (blue, red ring, yellow, green, white/black).
 2. **The parquet's `main_signs`/`sign_list` columns** — each unique code that
@@ -136,7 +136,7 @@ Output: [`viz/data/sign_colors.json`](viz/data/) (machine-readable, consumed
 by the MapLibre viewer) and [`viz/SIGN_CLASSIFICATION.md`](viz/SIGN_CLASSIFICATION.md)
 (human-readable, generated table per category).
 
-Currently 141 SVGs in `symbols/DE/` (133 from upstream SupaplexOSM + 8
+Currently 141 SVGs in `viz/symbols/DE/` (133 from upstream SupaplexOSM + 8
 hand-drawn in-repo). Family overrides (e.g. bare `241` → `241-30.svg`) are
 hardcoded in `PREFERRED_FAMILY_VARIANT` at the top of the script.
 
@@ -158,10 +158,10 @@ osm_trafficsigns/
 │   ├── build_pmtiles.py        parquet → PMTiles via tippecanoe (adds icon_code + stack columns)
 │   ├── build_qml.py            generate QGIS QML styles
 │   └── make_test_pbf.py        synthetic PBF generator used by the pipeline tests
-├── symbols/              SVG library (organized by country: DE/, AT/, ...)
 ├── osm/                  input PBFs (gitignored)
 ├── output/               parquet + QML (parquets gitignored)
 ├── viz/                  MapLibre web viewer — see viz/README.md
+│   └── symbols/          SVG library (organized by country: DE/, AT/, ...)
 ├── tests/                pytest suite (parsing + end-to-end pipeline)
 └── pyproject.toml
 ```
