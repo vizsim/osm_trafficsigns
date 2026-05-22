@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSM Traffic Signs — Bremen</title>
+    <link rel="icon" href="data:,">
+    <link href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="map"></div>
+
+    <div class="info-panel">
+        <div class="info-header">
+            <div class="info-header__titles">
+                <h1>OSM Traffic Signs</h1>
+                <div class="info-header__subtitle">
+                    basierened auf 
+                    <br>
+                    <a href="https://github.com/SupaplexOSM/traffic_sign_processing"
+                       target="_blank" rel="noopener">traffic_sign_processing von SupaplexOSM</a>
+                </div>
+            </div>
+            <button class="panel-toggle" id="info-panel-toggle"
+                    type="button"
+                    aria-expanded="true"
+                    aria-controls="info-panel-content"
+                    title="Panel minimieren">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 12h12" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span class="sr-only">Panel minimieren</span>
+            </button>
+        </div>
+        <div class="info-content" id="info-panel-content">
+            <div class="legend-toggle-row">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-traffic-signs-layer" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+                <div class="legend-toggle-row__title">
+                    <h3>Verkehrszeichen</h3>
+                </div>
+            </div>
+            <div class="legend-toggle-row legend-toggle-row--sub">
+                <label class="toggle-switch toggle-switch--sm">
+                    <input type="checkbox" id="toggle-supplementary-layer">
+                    <span class="toggle-slider"></span>
+                </label>
+                <div class="legend-toggle-row__title">
+                    <span>Zusatzzeichen anzeigen</span>
+                </div>
+            </div>
+            <div class="top-signs-section">
+                <div class="top-signs-header">
+                    Top 10 Hauptzeichen <span class="top-signs-total" id="top-signs-primary-total"></span>
+                </div>
+                <div class="top-signs-list" id="top-signs-primary-list"></div>
+            </div>
+            <div class="top-signs-section" id="top-signs-stack-section" style="display:none">
+                <div class="top-signs-header">
+                    Top 10 Zusatzzeichen <span class="top-signs-total" id="top-signs-stack-hint"></span>
+                </div>
+                <div class="top-signs-list" id="top-signs-stack-list"></div>
+            </div>
+
+            <div class="legend-footer">
+                <a class="legend-footer__badge"
+                   href="https://github.com/vizsim/osm_trafficsigns"
+                   target="_blank" rel="noopener"
+                   title="Quellcode auf GitHub">
+                    <img src="https://img.shields.io/badge/Status-Experimental-red"
+                         alt="Status: Experimental">
+                </a>
+                <a class="legend-footer__issues"
+                   href="https://github.com/vizsim/osm_trafficsigns/issues"
+                   target="_blank" rel="noopener"
+                   title="Fehler melden / Feedback">
+                    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                        <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                        <path fill="currentColor" d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                        <path fill="currentColor" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"/>
+                    </svg>
+                    <span>Issues</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <button id="map-settings-toggle" class="map-settings-toggle" type="button"
+            aria-expanded="false" aria-controls="map-settings-panel"
+            title="Kartenauswahl">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 6.5 8.5 4l7 2.5L21 4v13.5L15.5 20l-7-2.5L3 20V6.5Z"
+                  fill="none" stroke="currentColor" stroke-width="1.8"
+                  stroke-linejoin="round"/>
+            <path d="M8.5 4v13.5M15.5 6.5V20"
+                  fill="none" stroke="currentColor" stroke-width="1.8"
+                  stroke-linejoin="round"/>
+        </svg>
+        <span class="sr-only">Kartenauswahl</span>
+    </button>
+
+    <section id="map-settings-panel" class="map-settings-panel is-collapsed"
+             aria-labelledby="map-settings-title">
+        <div class="map-settings-header">
+            <h2 id="map-settings-title">Karte</h2>
+            <button id="map-settings-panel-toggle" class="panel-toggle"
+                    type="button" aria-expanded="true"
+                    aria-controls="map-settings-panel-content"
+                    title="Panel minimieren">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 12h12" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span class="sr-only">Panel minimieren</span>
+            </button>
+        </div>
+        <div id="map-settings-panel-content" class="map-settings-panel-content">
+            <div class="basemap-grid">
+                <button class="basemap-btn selected" type="button" data-basemap="positron">
+                    <span class="basemap-preview basemap-preview-positron"></span>
+                    <span class="basemap-label">Positron</span>
+                </button>
+                <button class="basemap-btn" type="button" data-basemap="osm">
+                    <span class="basemap-preview basemap-preview-osm"></span>
+                    <span class="basemap-label">OSM Carto</span>
+                </button>
+                <button class="basemap-btn" type="button" data-basemap="satellite">
+                    <span class="basemap-preview basemap-preview-satellite"></span>
+                    <span class="basemap-label">Esri Imagery</span>
+                </button>
+            </div>
+
+            <div class="terrain-row">
+                <div>
+                    <strong>Geländerelief</strong>
+                    <p>3D-Oberfläche + Hillshade</p>
+                </div>
+                <label class="switch">
+                    <input id="toggle-relief" type="checkbox">
+                    <span class="switch-slider"></span>
+                </label>
+            </div>
+
+            <div class="terrain-row">
+                <div>
+                    <strong>3D-Gebäude</strong>
+                    <p>Ab Zoom 14 sichtbar</p>
+                </div>
+                <label class="switch">
+                    <input id="toggle-buildings" type="checkbox">
+                    <span class="switch-slider"></span>
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/maplibre-gl@5.24.0"></script>
+    <script src="https://unpkg.com/pmtiles@4.3.0/dist/pmtiles.js"></script>
+    <script>
+        (function () {
+            const themeOverride = localStorage.getItem('theme-override');
+            if (themeOverride === 'dark' || themeOverride === 'light') {
+                document.documentElement.setAttribute('data-theme', themeOverride);
+            }
+        })();
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
