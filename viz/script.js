@@ -5,13 +5,14 @@ import {
     mapAttribution,
     mapStyles,
     trafficSignsConfig,
+    SIGNS_MIN_ZOOM,
 } from './config.js';
 import {
     addTrafficSignsSource,
     addTrafficSignsLayer,
     setTrafficSignsVisibility,
 } from './map/trafficSignsLayer.js';
-import { trafficSignsLayerIds } from './config.js';
+import { getAllTrafficSignsLayerIds } from './config.js';
 import { loadSignColors } from './utils/signColors.js';
 import { parseMapFromSearchParams, buildMapParam, updateUrlMapParam } from './utils/permalink.js';
 import {
@@ -58,6 +59,17 @@ if (typeof maplibregl === 'undefined' || typeof pmtiles === 'undefined') {
         const c = map.getCenter();
         updateUrlMapParam(buildMapParam([c.lng, c.lat], map.getZoom()));
     });
+
+    // Zoom-hint: visible whenever the user is below the pmtile minzoom so
+    // they understand why nothing's showing. Toggled via the [hidden]
+    // attribute — fires on every zoom tick (move event) for responsive feel.
+    const zoomHintEl = document.getElementById('zoom-hint');
+    function refreshZoomHint() {
+        if (!zoomHintEl) return;
+        zoomHintEl.hidden = map.getZoom() >= SIGNS_MIN_ZOOM;
+    }
+    map.on('move', refreshZoomHint);
+    refreshZoomHint();   // initial state
 
     function refreshTopSigns() {
         updateTopSigns(map, {
@@ -143,7 +155,7 @@ if (typeof maplibregl === 'undefined' || typeof pmtiles === 'undefined') {
         };
         const onEnter = () => { map.getCanvas().style.cursor = 'pointer'; };
         const onLeave = () => { map.getCanvas().style.cursor = ''; };
-        for (const layerId of trafficSignsLayerIds) {
+        for (const layerId of getAllTrafficSignsLayerIds()) {
             map.on('click', layerId, onSignClick);
             map.on('mouseenter', layerId, onEnter);
             map.on('mouseleave', layerId, onLeave);

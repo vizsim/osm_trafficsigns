@@ -11,6 +11,7 @@
 
 import {
     trafficSignsConfig,
+    trafficSignsSources,
     ICON_MIN_ZOOM,
 } from '../config.js';
 import { setHoverState, setHiddenState } from '../map/trafficSignsLayer.js';
@@ -173,11 +174,17 @@ export function updateTopSigns(map, { showSupplementary }) {
     // whose primary icon doesn't render — e.g. free-text-only Zusatzschilder
     // (`icon_code = ""`) that the icons layer skips at zoom ≥ ICON_MIN_ZOOM.
     // Trade-off: we get features from ALL loaded tiles (including outside the
-    // viewport) and must bbox-filter + dedupe by osm_id ourselves.
-    if (!map.getSource(trafficSignsConfig.sourceId)) return;
-    const allFeatures = map.querySourceFeatures(trafficSignsConfig.sourceId, {
-        sourceLayer: trafficSignsConfig.sourceLayer,
-    });
+    // viewport) and must bbox-filter + dedupe by osm_id ourselves. Concat
+    // across every per-state source so the top-N reflects all five datasets.
+    const allFeatures = [];
+    for (const src of trafficSignsSources) {
+        if (!map.getSource(src.sourceId)) continue;
+        const feats = map.querySourceFeatures(src.sourceId, {
+            sourceLayer: trafficSignsConfig.sourceLayer,
+        });
+        allFeatures.push(...feats);
+    }
+    if (!allFeatures.length) return;
     const b = map.getBounds();
     const w = b.getWest(), e = b.getEast();
     const s = b.getSouth(), n = b.getNorth();

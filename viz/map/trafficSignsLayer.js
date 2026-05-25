@@ -1,14 +1,17 @@
-// OSM traffic-signs source + three layers, all keyed on the `icon_code`
-// feature property (built by scripts/build_pmtiles.py — the canonical sign
-// code derived from sign_list, e.g. "274[30],..." -> "274-30").
-//   - dots (circle) for zoom 9–ICON_MIN_ZOOM
+// OSM traffic-signs source + layer set, replicated for each pmtile source.
+// Each entry in `trafficSignsSources` (config.js) gets its own MapLibre vector
+// source plus the full layer stack:
+//   - dots (circle) for zoom SIGNS_MIN_ZOOM..ICON_MIN_ZOOM
 //   - fallback-labels (symbol/text) for codes without a colour entry — shows
 //     the raw code beside an extra-prominent amber dot so unmapped signs
 //     stand out for inspection
-//   - icons (symbol/SVG) for zoom ICON_MIN_ZOOM and up
+//   - icons (symbol/SVG) for zoom ICON_MIN_ZOOM..maxzoom
+// Layer IDs are suffixed with the source key (-brandenburg, -sachsen, ...) so
+// the five replicas never collide.
 
 import {
     trafficSignsConfig,
+    trafficSignsSources,
     trafficSignsStyle,
     trafficSignsDotsLayerId,
     trafficSignsFallbackLabelLayerId,
@@ -18,7 +21,6 @@ import {
     trafficSignsStackIconLayerId,
     trafficSignsStackTextLayerId,
     trafficSignsStackFallbackLabelLayerId,
-    trafficSignsLayerIds,
     ICON_MIN_ZOOM,
     STACK_DEPTH,
 } from '../config.js';
@@ -29,8 +31,8 @@ import {
 } from './mapSafeOps.js';
 import { STACK_TEXT_BOX_ID, OVERLAY_TEXT_BG_ID, HOVER_GLOW_ID } from '../utils/trafficSignIcons.js';
 
-const trafficSignsHoverGlowPrimaryLayerId = 'osm-traffic-signs-hover-glow-primary';
-const trafficSignsHoverGlowStackLayerId = (slot) => `osm-traffic-signs-hover-glow-stack-${slot}`;
+const trafficSignsHoverGlowPrimaryLayerId = (srcKey) => `osm-traffic-signs-hover-glow-primary-${srcKey}`;
+const trafficSignsHoverGlowStackLayerId = (srcKey, slot) => `osm-traffic-signs-hover-glow-stack-${slot}-${srcKey}`;
 // Filter used as the "no-op" / hidden state on hover-glow layers.
 const NO_MATCH_FILTER = ['==', ['literal', 1], ['literal', 0]];
 
@@ -44,10 +46,12 @@ const DIRECTION_ROTATE_EXPR = [
 ];
 
 export function addTrafficSignsSource(map) {
-    addSourceIfMissing(map, trafficSignsConfig.sourceId, {
-        type: 'vector',
-        url: trafficSignsConfig.pmtiles,
-    });
+    for (const src of trafficSignsSources) {
+        addSourceIfMissing(map, src.sourceId, {
+            type: 'vector',
+            url: src.pmtiles,
+        });
+    }
 }
 
 /**
@@ -84,7 +88,7 @@ function buildStrokeWidthExpr(knownCodes) {
     return buildZoomMatchExpr(trafficSignsStyle.dotStrokeWidthStops, knownCodes);
 }
 
-function buildDotsSpec(signColors) {
+function buildDotsSpec(src, signColors) {
     const defaults = {
         fill: trafficSignsStyle.dotColor,
         stroke: trafficSignsStyle.dotStrokeColor,
@@ -94,9 +98,9 @@ function buildDotsSpec(signColors) {
     const stroke = colorExprs?.strokeExpr ?? defaults.stroke;
     const knownCodes = signColors?.knownCodes ?? [];
     return {
-        id: trafficSignsDotsLayerId,
+        id: trafficSignsDotsLayerId(src.key),
         type: 'circle',
-        source: trafficSignsConfig.sourceId,
+        source: src.sourceId,
         'source-layer': trafficSignsConfig.sourceLayer,
         minzoom: trafficSignsConfig.minzoom,
         maxzoom: ICON_MIN_ZOOM,
@@ -114,15 +118,15 @@ function buildDotsSpec(signColors) {
  * Text layer that shows the raw `main_signs` code next to fallback dots.
  * Filtered to features whose code is NOT in the colors map.
  */
-function buildFallbackLabelSpec(knownCodes) {
+function buildFallbackLabelSpec(src, knownCodes) {
     const filter = knownCodes?.length
         ? ['!', ['in', ['to-string', ['get', 'icon_code']], ['literal', knownCodes]]]
         // No knownCodes loaded -> show labels for nothing (avoid visual noise).
         : ['==', ['literal', 'never'], ['literal', 'always']];
     return {
-        id: trafficSignsFallbackLabelLayerId,
+        id: trafficSignsFallbackLabelLayerId(src.key),
         type: 'symbol',
-        source: trafficSignsConfig.sourceId,
+        source: src.sourceId,
         'source-layer': trafficSignsConfig.sourceLayer,
         minzoom: trafficSignsConfig.minzoom,
         maxzoom: ICON_MIN_ZOOM,
@@ -172,11 +176,11 @@ function buildIconSizeExpr(stops, codesWithSvg, scaleMap = {}) {
     return expr;
 }
 
-function buildIconsSpec(codesWithSvg, scaleMap) {
+function buildIconsSpec(src, codesWithSvg, scaleMap) {
     return {
-        id: trafficSignsIconsLayerId,
+        id: trafficSignsIconsLayerId(src.key),
         type: 'symbol',
-        source: trafficSignsConfig.sourceId,
+        source: src.sourceId,
         'source-layer': trafficSignsConfig.sourceLayer,
         minzoom: ICON_MIN_ZOOM,
         maxzoom: trafficSignsConfig.maxzoom,
@@ -194,12 +198,6 @@ function buildIconsSpec(codesWithSvg, scaleMap) {
     };
 }
 
-/**
- * Add all traffic-sign layers if not already present.
- *
- * @param {object} map
- * @param {import('../utils/signColors.js').SignColorBundle|null} [signColors]
- */
 /**
  * Per-slot icon-offset (in icon-LOCAL pixels, zoom-interpolated). Multiplied
  * by icon-size at runtime AND rotated with icon-rotate, so stack items hang
@@ -228,12 +226,12 @@ function buildSlotTextOffsetExpr(slot) {
     return expr;
 }
 
-function buildStackIconSpec(slot) {
+function buildStackIconSpec(src, slot) {
     const codeProp = `stack_${slot}_code`;
     return {
-        id: trafficSignsStackIconLayerId(slot),
+        id: trafficSignsStackIconLayerId(src.key, slot),
         type: 'symbol',
-        source: trafficSignsConfig.sourceId,
+        source: src.sourceId,
         'source-layer': trafficSignsConfig.sourceLayer,
         minzoom: ICON_MIN_ZOOM,
         maxzoom: trafficSignsConfig.maxzoom,
@@ -263,12 +261,12 @@ function buildStackIconSpec(slot) {
     };
 }
 
-function buildStackTextSpec(slot) {
+function buildStackTextSpec(src, slot) {
     const textProp = `stack_${slot}_text`;
     return {
-        id: trafficSignsStackTextLayerId(slot),
+        id: trafficSignsStackTextLayerId(src.key, slot),
         type: 'symbol',
-        source: trafficSignsConfig.sourceId,
+        source: src.sourceId,
         'source-layer': trafficSignsConfig.sourceLayer,
         minzoom: ICON_MIN_ZOOM,
         maxzoom: trafficSignsConfig.maxzoom,
@@ -306,19 +304,8 @@ function buildStackTextSpec(slot) {
 /**
  * Build a small label layer that sits ABOVE a fallback (grey) icon so the
  * user can identify what sign code that fallback represents.
- *
- * `codeProp`            — feature property holding the sign code (e.g. `icon_code`
- *                          or `stack_1_code`)
- * `textOffsetExpr`      — zoom-interpolated text-offset expression in EM. Use a
- *                          NEGATIVE Y for primary (above feature center) or a
- *                          slightly-less-than-stack-text-offset for stack slots
- *                          (above the slot's icon).
- * `extraFilter`         — optional extra filter combined with "code set + not in
- *                          codesWithSvg".
- * `hiddenByDefault`     — set visibility:'none' so the supplementary toggle
- *                          controls it (used for stack slots).
  */
-function buildFallbackTextLayer({ id, codeProp, textOffsetExpr, codesWithSvg, hiddenByDefault }) {
+function buildFallbackTextLayer({ id, src, codeProp, textOffsetExpr, codesWithSvg, hiddenByDefault }) {
     const layout = {
         'text-field': ['to-string', ['get', codeProp]],
         'text-size': trafficSignsStyle.fallbackHighZoomTextSize,
@@ -346,7 +333,7 @@ function buildFallbackTextLayer({ id, codeProp, textOffsetExpr, codesWithSvg, hi
     return {
         id,
         type: 'symbol',
-        source: trafficSignsConfig.sourceId,
+        source: src.sourceId,
         'source-layer': trafficSignsConfig.sourceLayer,
         minzoom: ICON_MIN_ZOOM,
         maxzoom: trafficSignsConfig.maxzoom,
@@ -384,11 +371,11 @@ function buildStackFallbackTextOffsetExpr(slot) {
     return expr;
 }
 
-function buildOverlayTextSpec() {
+function buildOverlayTextSpec(src) {
     return {
-        id: trafficSignsOverlayTextLayerId,
+        id: trafficSignsOverlayTextLayerId(src.key),
         type: 'symbol',
-        source: trafficSignsConfig.sourceId,
+        source: src.sourceId,
         'source-layer': trafficSignsConfig.sourceLayer,
         minzoom: ICON_MIN_ZOOM,
         maxzoom: trafficSignsConfig.maxzoom,
@@ -431,11 +418,11 @@ function buildOverlayTextSpec() {
  * defaults to no-match; setHoverState updates it to the hovered code/text so
  * a single feature lights up.
  */
-function buildHoverGlowPrimarySpec() {
+function buildHoverGlowPrimarySpec(src) {
     return {
-        id: trafficSignsHoverGlowPrimaryLayerId,
+        id: trafficSignsHoverGlowPrimaryLayerId(src.key),
         type: 'symbol',
-        source: trafficSignsConfig.sourceId,
+        source: src.sourceId,
         'source-layer': trafficSignsConfig.sourceLayer,
         minzoom: trafficSignsConfig.minzoom,
         maxzoom: trafficSignsConfig.maxzoom,
@@ -446,6 +433,7 @@ function buildHoverGlowPrimarySpec() {
             // zoom so it haloes the sign rather than disappearing under it.
             // The z22 stop clamps growth past z18 (same reason as iconSizeStops).
             'icon-size': ['interpolate', ['linear'], ['zoom'],
+                8, 0.08,
                 9, 0.10,
                 12, 0.18,
                 ICON_MIN_ZOOM, 0.38,
@@ -518,11 +506,11 @@ function buildGlowStackOffsetExpr(slot) {
     return expr;
 }
 
-function buildHoverGlowStackSpec(slot) {
+function buildHoverGlowStackSpec(src, slot) {
     return {
-        id: trafficSignsHoverGlowStackLayerId(slot),
+        id: trafficSignsHoverGlowStackLayerId(src.key, slot),
         type: 'symbol',
-        source: trafficSignsConfig.sourceId,
+        source: src.sourceId,
         'source-layer': trafficSignsConfig.sourceLayer,
         minzoom: ICON_MIN_ZOOM,
         maxzoom: trafficSignsConfig.maxzoom,
@@ -545,82 +533,98 @@ function buildHoverGlowStackSpec(slot) {
     };
 }
 
+/**
+ * Add all traffic-sign layers if not already present — once per source.
+ *
+ * @param {object} map
+ * @param {import('../utils/signColors.js').SignColorBundle|null} [signColors]
+ */
 export function addTrafficSignsLayer(map, signColors = null) {
     const codesWithSvg = signColors?.codesWithSvg ?? [];
 
-    // Primary glow sits at the BOTTOM of the traffic-sign stack so it haloes
-    // dots/icons rather than covering them.
-    addLayerIfMissing(map, buildHoverGlowPrimarySpec());
-    addLayerIfMissing(map, buildDotsSpec(signColors));
-    addLayerIfMissing(map, buildFallbackLabelSpec(signColors?.knownCodes ?? []));
-    addLayerIfMissing(map, buildIconsSpec(codesWithSvg, signColors?.scaleMap));
-    addLayerIfMissing(map, buildOverlayTextSpec());
-    // Primary fallback label sits ABOVE the grey fallback icon when icon_code
-    // is unmapped. Not gated by the supplementary toggle — part of primary.
-    addLayerIfMissing(map, buildFallbackTextLayer({
-        id: trafficSignsPrimaryFallbackLabelLayerId,
-        codeProp: 'icon_code',
-        textOffsetExpr: buildPrimaryFallbackTextOffsetExpr(),
-        codesWithSvg,
-        hiddenByDefault: false,
-    }));
-    // Stack layers: glow first (so it sits below the icon), then icons
-    // (so text sits above them in z-order), then text-replacement layers,
-    // then fallback labels for slot icons.
-    for (let slot = 1; slot <= STACK_DEPTH; slot++) {
-        addLayerIfMissing(map, buildHoverGlowStackSpec(slot));
-    }
-    for (let slot = 1; slot <= STACK_DEPTH; slot++) {
-        addLayerIfMissing(map, buildStackIconSpec(slot));
-    }
-    for (let slot = 1; slot <= STACK_DEPTH; slot++) {
-        addLayerIfMissing(map, buildStackTextSpec(slot));
-    }
-    for (let slot = 1; slot <= STACK_DEPTH; slot++) {
+    for (const src of trafficSignsSources) {
+        // Primary glow sits at the BOTTOM of this source's traffic-sign stack
+        // so it haloes dots/icons rather than covering them.
+        addLayerIfMissing(map, buildHoverGlowPrimarySpec(src));
+        addLayerIfMissing(map, buildDotsSpec(src, signColors));
+        addLayerIfMissing(map, buildFallbackLabelSpec(src, signColors?.knownCodes ?? []));
+        addLayerIfMissing(map, buildIconsSpec(src, codesWithSvg, signColors?.scaleMap));
+        addLayerIfMissing(map, buildOverlayTextSpec(src));
+        // Primary fallback label sits ABOVE the grey fallback icon when icon_code
+        // is unmapped. Not gated by the supplementary toggle — part of primary.
         addLayerIfMissing(map, buildFallbackTextLayer({
-            id: trafficSignsStackFallbackLabelLayerId(slot),
-            codeProp: `stack_${slot}_code`,
-            textOffsetExpr: buildStackFallbackTextOffsetExpr(slot),
+            id: trafficSignsPrimaryFallbackLabelLayerId(src.key),
+            src,
+            codeProp: 'icon_code',
+            textOffsetExpr: buildPrimaryFallbackTextOffsetExpr(),
             codesWithSvg,
-            hiddenByDefault: true,   // tied to the "Zusatzzeichen anzeigen" toggle
+            hiddenByDefault: false,
         }));
+        // Stack layers: glow first (so it sits below the icon), then icons
+        // (so text sits above them in z-order), then text-replacement layers,
+        // then fallback labels for slot icons.
+        for (let slot = 1; slot <= STACK_DEPTH; slot++) {
+            addLayerIfMissing(map, buildHoverGlowStackSpec(src, slot));
+        }
+        for (let slot = 1; slot <= STACK_DEPTH; slot++) {
+            addLayerIfMissing(map, buildStackIconSpec(src, slot));
+        }
+        for (let slot = 1; slot <= STACK_DEPTH; slot++) {
+            addLayerIfMissing(map, buildStackTextSpec(src, slot));
+        }
+        for (let slot = 1; slot <= STACK_DEPTH; slot++) {
+            addLayerIfMissing(map, buildFallbackTextLayer({
+                id: trafficSignsStackFallbackLabelLayerId(src.key, slot),
+                src,
+                codeProp: `stack_${slot}_code`,
+                textOffsetExpr: buildStackFallbackTextOffsetExpr(slot),
+                codesWithSvg,
+                hiddenByDefault: true,   // tied to the "Zusatzzeichen anzeigen" toggle
+            }));
+        }
     }
 }
 
-/** Primary layers — dots, fallback labels, icons, primary fallback label.
- *  Always governed by the main "Verkehrszeichen anzeigen" toggle. */
-const primaryLayerIds = [
-    trafficSignsHoverGlowPrimaryLayerId,
-    trafficSignsDotsLayerId,
-    trafficSignsFallbackLabelLayerId,
-    trafficSignsIconsLayerId,
-    trafficSignsOverlayTextLayerId,
-    trafficSignsPrimaryFallbackLabelLayerId,
-];
+/** Primary layer IDs for one source — dots, fallback labels, icons, primary
+ *  fallback label. Always governed by the main "Verkehrszeichen anzeigen". */
+function primaryLayerIdsFor(srcKey) {
+    return [
+        trafficSignsHoverGlowPrimaryLayerId(srcKey),
+        trafficSignsDotsLayerId(srcKey),
+        trafficSignsFallbackLabelLayerId(srcKey),
+        trafficSignsIconsLayerId(srcKey),
+        trafficSignsOverlayTextLayerId(srcKey),
+        trafficSignsPrimaryFallbackLabelLayerId(srcKey),
+    ];
+}
 
-/** Stack (supplementary) layers — icon, text, fallback label per slot.
+/** Stack (supplementary) layer IDs for one source — icon, text, fallback per slot.
  *  Governed by the "Zusatzzeichen anzeigen" sub-toggle. */
-const supplementaryLayerIds = (() => {
+function supplementaryLayerIdsFor(srcKey) {
     const ids = [];
     for (let i = 1; i <= STACK_DEPTH; i++) {
-        ids.push(trafficSignsHoverGlowStackLayerId(i));
-        ids.push(trafficSignsStackIconLayerId(i));
-        ids.push(trafficSignsStackTextLayerId(i));
-        ids.push(trafficSignsStackFallbackLabelLayerId(i));
+        ids.push(
+            trafficSignsHoverGlowStackLayerId(srcKey, i),
+            trafficSignsStackIconLayerId(srcKey, i),
+            trafficSignsStackTextLayerId(srcKey, i),
+            trafficSignsStackFallbackLabelLayerId(srcKey, i),
+        );
     }
     return ids;
-})();
+}
 
 /**
- * Update visibility for both layer groups.
+ * Update visibility for both layer groups across every source.
  *
  * @param {boolean} main          — primary layers (dots, fallback, icons)
  * @param {boolean} supplementary — stack layers (only effective when main is on)
  */
 export function setTrafficSignsVisibility(map, { main, supplementary }) {
-    for (const id of primaryLayerIds) setLayerVisibility(map, id, main);
     const stackVisible = main && supplementary;
-    for (const id of supplementaryLayerIds) setLayerVisibility(map, id, stackVisible);
+    for (const src of trafficSignsSources) {
+        for (const id of primaryLayerIdsFor(src.key)) setLayerVisibility(map, id, main);
+        for (const id of supplementaryLayerIdsFor(src.key)) setLayerVisibility(map, id, stackVisible);
+    }
 }
 
 // ─── Hover / hide interactions (driven by the top-N counter rows) ──────────
@@ -631,7 +635,8 @@ function hasLayer(map, id) {
 
 /**
  * Light up the hover-glow halo for the sign(s) whose code/text the user is
- * hovering. Driven by setFilter — cheap per-frame work.
+ * hovering. Applied to every source so a code present in multiple states
+ * lights up across all of them.
  *
  * @param {object|null} hovered — `null` to clear, or
  *        `{section: 'primary'|'stack', kind: 'code'|'text', value: string}`
@@ -641,23 +646,25 @@ export function setHoverState(map, hovered) {
     const stackCodeMatch = (hovered?.section === 'stack' && hovered.kind === 'code') ? hovered.value : null;
     const stackTextMatch = (hovered?.section === 'stack' && hovered.kind === 'text') ? hovered.value : null;
 
-    if (hasLayer(map, trafficSignsHoverGlowPrimaryLayerId)) {
-        const filter = primaryMatch
-            ? ['==', ['to-string', ['get', 'icon_code']], primaryMatch]
-            : NO_MATCH_FILTER;
-        map.setFilter(trafficSignsHoverGlowPrimaryLayerId, filter);
-    }
-
-    for (let slot = 1; slot <= STACK_DEPTH; slot++) {
-        const layerId = trafficSignsHoverGlowStackLayerId(slot);
-        if (!hasLayer(map, layerId)) continue;
-        let filter = NO_MATCH_FILTER;
-        if (stackCodeMatch) {
-            filter = ['==', ['to-string', ['get', `stack_${slot}_code`]], stackCodeMatch];
-        } else if (stackTextMatch) {
-            filter = ['==', ['to-string', ['get', `stack_${slot}_text`]], stackTextMatch];
+    for (const src of trafficSignsSources) {
+        const primaryGlowId = trafficSignsHoverGlowPrimaryLayerId(src.key);
+        if (hasLayer(map, primaryGlowId)) {
+            const filter = primaryMatch
+                ? ['==', ['to-string', ['get', 'icon_code']], primaryMatch]
+                : NO_MATCH_FILTER;
+            map.setFilter(primaryGlowId, filter);
         }
-        map.setFilter(layerId, filter);
+        for (let slot = 1; slot <= STACK_DEPTH; slot++) {
+            const layerId = trafficSignsHoverGlowStackLayerId(src.key, slot);
+            if (!hasLayer(map, layerId)) continue;
+            let filter = NO_MATCH_FILTER;
+            if (stackCodeMatch) {
+                filter = ['==', ['to-string', ['get', `stack_${slot}_code`]], stackCodeMatch];
+            } else if (stackTextMatch) {
+                filter = ['==', ['to-string', ['get', `stack_${slot}_text`]], stackTextMatch];
+            }
+            map.setFilter(layerId, filter);
+        }
     }
 }
 
@@ -679,29 +686,32 @@ function applyOp(map, layerId, prop, baseValue, check) {
 }
 
 /**
- * Hide selected codes/texts by driving their layer opacities to zero.
+ * Hide selected codes/texts by driving their layer opacities to zero. Applied
+ * to every source so click-hidden codes vanish from all states uniformly.
  *
  * @param {object} hidden — `{ primary: string[], stackCodes: string[], stackTexts: string[] }`
  */
 export function setHiddenState(map, { primary = [], stackCodes = [], stackTexts = [] } = {}) {
     const primaryCheck = inExpr('icon_code', primary);
 
-    applyOp(map, trafficSignsIconsLayerId, 'icon-opacity', trafficSignsStyle.iconOpacity, primaryCheck);
-    applyOp(map, trafficSignsDotsLayerId, 'circle-opacity', 0.95, primaryCheck);
-    applyOp(map, trafficSignsFallbackLabelLayerId, 'text-opacity', 1.0, primaryCheck);
-    applyOp(map, trafficSignsPrimaryFallbackLabelLayerId, 'text-opacity', 1.0, primaryCheck);
-    applyOp(map, trafficSignsPrimaryFallbackLabelLayerId, 'icon-opacity', 0.95, primaryCheck);
-    applyOp(map, trafficSignsOverlayTextLayerId, 'text-opacity', 1.0, primaryCheck);
-    applyOp(map, trafficSignsOverlayTextLayerId, 'icon-opacity', 1.0, primaryCheck);
+    for (const src of trafficSignsSources) {
+        applyOp(map, trafficSignsIconsLayerId(src.key), 'icon-opacity', trafficSignsStyle.iconOpacity, primaryCheck);
+        applyOp(map, trafficSignsDotsLayerId(src.key), 'circle-opacity', 0.95, primaryCheck);
+        applyOp(map, trafficSignsFallbackLabelLayerId(src.key), 'text-opacity', 1.0, primaryCheck);
+        applyOp(map, trafficSignsPrimaryFallbackLabelLayerId(src.key), 'text-opacity', 1.0, primaryCheck);
+        applyOp(map, trafficSignsPrimaryFallbackLabelLayerId(src.key), 'icon-opacity', 0.95, primaryCheck);
+        applyOp(map, trafficSignsOverlayTextLayerId(src.key), 'text-opacity', 1.0, primaryCheck);
+        applyOp(map, trafficSignsOverlayTextLayerId(src.key), 'icon-opacity', 1.0, primaryCheck);
 
-    for (let slot = 1; slot <= STACK_DEPTH; slot++) {
-        const codeCheck = inExpr(`stack_${slot}_code`, stackCodes);
-        const textCheck = inExpr(`stack_${slot}_text`, stackTexts);
+        for (let slot = 1; slot <= STACK_DEPTH; slot++) {
+            const codeCheck = inExpr(`stack_${slot}_code`, stackCodes);
+            const textCheck = inExpr(`stack_${slot}_text`, stackTexts);
 
-        applyOp(map, trafficSignsStackIconLayerId(slot), 'icon-opacity', 0.92, codeCheck);
-        applyOp(map, trafficSignsStackFallbackLabelLayerId(slot), 'text-opacity', 1.0, codeCheck);
-        applyOp(map, trafficSignsStackFallbackLabelLayerId(slot), 'icon-opacity', 0.95, codeCheck);
-        applyOp(map, trafficSignsStackTextLayerId(slot), 'text-opacity', 1.0, textCheck);
-        applyOp(map, trafficSignsStackTextLayerId(slot), 'icon-opacity', 0.95, textCheck);
+            applyOp(map, trafficSignsStackIconLayerId(src.key, slot), 'icon-opacity', 0.92, codeCheck);
+            applyOp(map, trafficSignsStackFallbackLabelLayerId(src.key, slot), 'text-opacity', 1.0, codeCheck);
+            applyOp(map, trafficSignsStackFallbackLabelLayerId(src.key, slot), 'icon-opacity', 0.95, codeCheck);
+            applyOp(map, trafficSignsStackTextLayerId(src.key, slot), 'text-opacity', 1.0, textCheck);
+            applyOp(map, trafficSignsStackTextLayerId(src.key, slot), 'icon-opacity', 0.95, textCheck);
+        }
     }
 }

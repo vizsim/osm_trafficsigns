@@ -18,23 +18,39 @@ export const mapAttribution =
     '<a href="https://github.com/SupaplexOSM/traffic_sign_processing" target="_blank" rel="noopener">SupaplexOSM</a>';
 
 export const initialMapConfig = {
-    // Berlin Mitte — overview at zoom 11 so the whole dataset is visible.
+    // Berlin Mitte at z9 — covers Berlin + a sizeable chunk of the surrounding
+    // states so the user can see all five datasets are loaded.
     center: [13.404, 52.520],
-    zoom: 11,
+    zoom: 9,
 };
 
 /** Zoom threshold: dots below, SVG icons at and above. */
 export const ICON_MIN_ZOOM = 13;
 
+/** Lowest zoom at which sign tiles exist (matches MIN_ZOOM in build_pmtiles.py).
+ *  Below this, the info panel shows a hint that signs only appear from z8. */
+export const SIGNS_MIN_ZOOM = 8;
+
 /** How many additional sign-list items to render below the primary icon.
  *  Must match STACK_DEPTH in scripts/build_pmtiles.py. */
 export const STACK_DEPTH = 3;
 
+/**
+ * Each source becomes a separate vector source in MapLibre, each carrying the
+ * full set of traffic-sign layers. All five render simultaneously. The `key`
+ * is appended to layer IDs to keep them unique per source.
+ */
+export const trafficSignsSources = [
+    { key: 'brandenburg',           sourceId: 'osm-traffic-signs-brandenburg',           pmtiles: `${PMTILES_PREFIX}${docBase}data/brandenburg_signs.pmtiles` },
+    { key: 'sachsen',               sourceId: 'osm-traffic-signs-sachsen',               pmtiles: `${PMTILES_PREFIX}${docBase}data/sachsen_signs.pmtiles` },
+    { key: 'mecklenburg_vorpommern', sourceId: 'osm-traffic-signs-mecklenburg-vorpommern', pmtiles: `${PMTILES_PREFIX}${docBase}data/mecklenburg_vorpommern_signs.pmtiles` },
+    { key: 'sachsen_anhalt',        sourceId: 'osm-traffic-signs-sachsen-anhalt',        pmtiles: `${PMTILES_PREFIX}${docBase}data/sachsen_anhalt_signs.pmtiles` },
+    { key: 'thueringen',            sourceId: 'osm-traffic-signs-thueringen',            pmtiles: `${PMTILES_PREFIX}${docBase}data/thueringen_signs.pmtiles` },
+];
+
 export const trafficSignsConfig = {
-    sourceId: 'osm-traffic-signs',
     sourceLayer: 'traffic_signs',
-    pmtiles: `${PMTILES_PREFIX}${docBase}data/berlin_signs.pmtiles`,
-    minzoom: 9,
+    minzoom: SIGNS_MIN_ZOOM,
     maxzoom: 22,
     iconBaseUrl: `${docBase}symbols/`,     // resolved as <docBase>symbols/<country>/<code>.svg
     defaultIconId: 'traffic-sign-default',
@@ -66,12 +82,16 @@ export const trafficSignsStyle = {
     // Per-zoom stops as [zoom, valueForKnownCodes, valueForFallback].
     // Built into a single interpolate(zoom) + nested match in trafficSignsLayer.js
     // (MapLibre forbids more than one zoom-based subexpression per property).
+    // z8 stop matches z9 — dots first appear visible at z8 with their z9 size
+    // (interpolation kicks in from z9 → z12 for the gradual grow-in).
     dotRadiusStops: [
+        [SIGNS_MIN_ZOOM, 1.6, 2.4],
         [9, 1.6, 2.4],
         [12, 3.0, 4.5],
         [ICON_MIN_ZOOM, 3.5, 5.5],
     ],
     dotStrokeWidthStops: [
+        [SIGNS_MIN_ZOOM, 0.4, 0.6],
         [9, 0.4, 0.6],
         [12, 0.8, 1.0],
         [ICON_MIN_ZOOM, 1.0, 1.2],
@@ -81,6 +101,7 @@ export const trafficSignsStyle = {
     fallbackLabelHalo: '#ffffff',
     fallbackLabelSize: [
         'interpolate', ['linear'], ['zoom'],
+        SIGNS_MIN_ZOOM, 9,
         9, 9,
         12, 10,
         ICON_MIN_ZOOM, 11,
@@ -211,27 +232,37 @@ export const trafficSignsStyle = {
     },
 };
 
-export const trafficSignsDotsLayerId = 'osm-traffic-signs-dots';
-export const trafficSignsFallbackLabelLayerId = 'osm-traffic-signs-fallback-labels';
-export const trafficSignsIconsLayerId = 'osm-traffic-signs-symbols';
-export const trafficSignsOverlayTextLayerId = 'osm-traffic-signs-overlay-text';
-export const trafficSignsPrimaryFallbackLabelLayerId = 'osm-traffic-signs-primary-fallback-label';
-export const trafficSignsStackIconLayerId = (slot) => `osm-traffic-signs-stack-${slot}-icon`;
-export const trafficSignsStackTextLayerId = (slot) => `osm-traffic-signs-stack-${slot}-text`;
-export const trafficSignsStackFallbackLabelLayerId = (slot) => `osm-traffic-signs-stack-${slot}-fallback-label`;
+// Layer IDs are per-source: each base ID gets the source key appended so the
+// five sources don't collide. The exported functions take `srcKey` and return
+// the unique layer ID for that source.
+export const trafficSignsDotsLayerId = (srcKey) => `osm-traffic-signs-dots-${srcKey}`;
+export const trafficSignsFallbackLabelLayerId = (srcKey) => `osm-traffic-signs-fallback-labels-${srcKey}`;
+export const trafficSignsIconsLayerId = (srcKey) => `osm-traffic-signs-symbols-${srcKey}`;
+export const trafficSignsOverlayTextLayerId = (srcKey) => `osm-traffic-signs-overlay-text-${srcKey}`;
+export const trafficSignsPrimaryFallbackLabelLayerId = (srcKey) => `osm-traffic-signs-primary-fallback-label-${srcKey}`;
+export const trafficSignsStackIconLayerId = (srcKey, slot) => `osm-traffic-signs-stack-${slot}-icon-${srcKey}`;
+export const trafficSignsStackTextLayerId = (srcKey, slot) => `osm-traffic-signs-stack-${slot}-text-${srcKey}`;
+export const trafficSignsStackFallbackLabelLayerId = (srcKey, slot) => `osm-traffic-signs-stack-${slot}-fallback-label-${srcKey}`;
 
-const stackLayerIds = [];
-for (let i = 1; i <= STACK_DEPTH; i++) {
-    stackLayerIds.push(trafficSignsStackIconLayerId(i));
-    stackLayerIds.push(trafficSignsStackTextLayerId(i));
-    stackLayerIds.push(trafficSignsStackFallbackLabelLayerId(i));
+/** Flat list of every traffic-sign layer ID across all sources.
+ *  Used by event-binding code (click/hover handlers attach per layer ID). */
+export function getAllTrafficSignsLayerIds() {
+    const ids = [];
+    for (const src of trafficSignsSources) {
+        ids.push(
+            trafficSignsDotsLayerId(src.key),
+            trafficSignsFallbackLabelLayerId(src.key),
+            trafficSignsIconsLayerId(src.key),
+            trafficSignsOverlayTextLayerId(src.key),
+            trafficSignsPrimaryFallbackLabelLayerId(src.key),
+        );
+        for (let i = 1; i <= STACK_DEPTH; i++) {
+            ids.push(
+                trafficSignsStackIconLayerId(src.key, i),
+                trafficSignsStackTextLayerId(src.key, i),
+                trafficSignsStackFallbackLabelLayerId(src.key, i),
+            );
+        }
+    }
+    return ids;
 }
-
-export const trafficSignsLayerIds = [
-    trafficSignsDotsLayerId,
-    trafficSignsFallbackLabelLayerId,
-    trafficSignsIconsLayerId,
-    trafficSignsOverlayTextLayerId,
-    trafficSignsPrimaryFallbackLabelLayerId,
-    ...stackLayerIds,
-];

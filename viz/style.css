@@ -213,6 +213,29 @@ body {
     flex-shrink: 0;
 }
 
+/* Zoom hint shown when the user is zoomed out past the pmtile minzoom.
+ * Toggled via [hidden] attribute on the element — no class shenanigans. */
+.zoom-hint {
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: #fff7ed;          /* amber-50 — gentle attention without alarm */
+    border: 1px solid #fdba74;    /* amber-300 */
+    color: #7c2d12;               /* amber-900 */
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+[data-theme="dark"] .zoom-hint {
+    background: #3a2410;
+    border-color: #9a3412;
+    color: #fed7aa;
+}
+
+.zoom-hint strong {
+    font-weight: 600;
+}
+
 /* ───── Top-N sign counters (info-panel) ───── */
 
 .top-signs-section {

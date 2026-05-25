@@ -88,7 +88,7 @@ See [viz/README.md](viz/README.md). tl;dr from the repo root:
 
 ```bash
 uv run python scripts/extract_sign_colors.py  # build the colour-classification JSON + docs
-uv run python scripts/build_pmtiles.py        # bremen_signs.parquet → viz/data/bremen_signs.pmtiles
+uv run python scripts/build_pmtiles.py        # default: rebuilds the 5 east-Germany state pmtiles
 python3 -m http.server 8000 --directory viz   # open http://localhost:8000/
 ```
 
@@ -97,10 +97,35 @@ separate fetch step needed. Most SVGs are from
 [SupaplexOSM](https://github.com/SupaplexOSM/traffic_sign_processing); a
 few are hand-drawn in-tree for codes the upstream doesn't have.
 
-Features: per-sign-type dot colours at low zoom, real StVO SVG icons at high
-zoom rotated by `direction`, stacking of supplementary signs (Zusatzzeichen)
-toggleable from the UI, permalinks (`?map=zoom/lat/lon`), fallback "grey
-badge" with the raw sign code when an SVG isn't in the library.
+Features: per-sign-type dot colours at low zoom (from z8), real StVO SVG icons
+at high zoom rotated by `direction`, stacking of supplementary signs
+(Zusatzzeichen) toggleable from the UI, permalinks (`?map=zoom/lat/lon`),
+fallback "grey badge" with the raw sign code when an SVG isn't in the library,
+and an amber "zoom in" hint when the viewport is below z8.
+
+### Datasets currently shipped in the viewer
+
+Five east-German states are loaded simultaneously as separate PMTiles vector
+sources (one set of MapLibre layers per source, all rendered together). The
+build was done by `/tmp/process_state.sh` (download → `osmium tags-filter` →
+`uv run tsp` → `build_pmtiles.py`), four states in parallel:
+
+| Bundesland                 |     Pipeline time | Sign features | PMTiles size |
+| -------------------------- | ----------------: | ------------: | -----------: |
+| Brandenburg (incl. Berlin) |         14:30 min |        45 514 |        15 MB |
+| Sachsen                    |          3:18 min |        33 558 |        13 MB |
+| Sachsen-Anhalt             |          2:45 min |        86 051 |        25 MB |
+| Thüringen                  |          1:56 min |        24 275 |         9 MB |
+| Mecklenburg-Vorpommern     |          1:10 min |        10 213 |       5.5 MB |
+| **Total**                  | **~3:20 min** ¹   |  **~199 600** |   **~67 MB** |
+
+¹ wall-clock for the four post-Brandenburg states, run in parallel.
+
+Brandenburg was processed first (before the parallel batch) — its 14:30 min
+pipeline is the wall-time bottleneck on the original solo run, dominated by
+the `tsp/zones.py` step (9:15 min) because Brandenburg has ~1.1 M highways.
+Adding more states to the viewer = drop a `{key, sourceId, pmtiles}` entry
+into `trafficSignsSources` in [viz/config.js](viz/config.js).
 
 ## QGIS style (SVG sign symbols)
 

@@ -25,7 +25,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 PARQUET_DIR = REPO_ROOT / "output"
 PMTILES_DIR = REPO_ROOT / "viz" / "data"
 LAYER_NAME = "traffic_signs"
-MIN_ZOOM = 9
+MIN_ZOOM = 8
 MAX_ZOOM = 16
 
 
@@ -101,8 +101,15 @@ def run_tippecanoe(geojson_path: Path, pmtiles_path: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "names", nargs="*", default=["bremen_signs", "berlin_signs", "neukoelln_signs"],
-        help="Parquet basenames in output/ to convert (default: bremen_signs).",
+        "names", nargs="*",
+        default=[
+            "brandenburg_signs",
+            "sachsen_signs",
+            "mecklenburg_vorpommern_signs",
+            "sachsen_anhalt_signs",
+            "thueringen_signs",
+        ],
+        help="Parquet basenames in output/ to convert (default: the five viz states).",
     )
     args = parser.parse_args()
 
